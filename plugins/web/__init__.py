@@ -1,6 +1,6 @@
 from requests import get
 class main:
-    def __init__(self) -> None:
+    def __init__(self, moduleDir) -> None:
         pass
     
     def catch(self, cmd:str):
@@ -11,6 +11,9 @@ class main:
             return
         
         link,file = split_cmd[1:]
+
+        if not "http" in link:
+            link = "http://"+link
 
         response = get(link)
 

@@ -13,7 +13,8 @@ def load_plugins():
 
         pl = importlib.import_module("plugins." + plugin)
         importlib.reload(pl)
-        pl = pl.main()
+        moduleDir = f"{getcwd()}/plugins/{plugin}"
+        pl = pl.main(moduleDir)
 
         # put all funcs of plugin in a list and append it to the dict of the plugin (pluginsFunctions)
         plFunctions = []

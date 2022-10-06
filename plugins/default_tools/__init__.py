@@ -3,10 +3,14 @@ from os import path, rename as renameFile
 from platform import system as operating_system
 from colorama import Fore, init
 
+import importlib.util
+import sys
+
 class main:
-    def __init__(self) -> None:
+    def __init__(self, moduleDir) -> None:
         self.os = operating_system()
         init()
+
 
     def oncmd(self,command):
         #what happens on every command (not if only enter is pressed)
