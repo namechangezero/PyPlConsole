@@ -7,7 +7,7 @@ import importlib.util
 import sys
 
 class main:
-    def __init__(self, moduleDir) -> None:
+    def __init__(self, moduleDir, startDir) -> None:
         self.os = operating_system()
         init()
 
