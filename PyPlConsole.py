@@ -60,6 +60,9 @@ while True:
     cmd_no_args = cmd.split()[0]
 
     if cmd_no_args in set({"rl","reload"}):
+        if "_bye" in pluginsFunctions:
+            for bye in pluginsFunctions["_bye"]:
+                bye._bye()
         pluginsFunctions = {}
         load_plugins()
 
@@ -67,6 +70,12 @@ while True:
     if "oncmd" in pluginsFunctions:
         for onCmd in pluginsFunctions["oncmd"]:
             onCmd.oncmd(cmd)
+
+    if cmd_no_args == "exit":
+        if "_bye" in pluginsFunctions:
+            for bye in pluginsFunctions["_bye"]:
+                bye._bye()
+        exit()
 
     # running the command of the input from the plugins
     if cmd_no_args in pluginsFunctions:

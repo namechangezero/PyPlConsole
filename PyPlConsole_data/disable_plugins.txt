@@ -2,3 +2,5 @@
 / for example:
 / plugin_name (without slash/ at the begining)
 / slashes(/) at the begining like here can be used for comments (wont affect anything)
+
+activity_log

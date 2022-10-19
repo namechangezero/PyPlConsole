@@ -105,10 +105,6 @@ class main:
 
     rename = mv
 
-    def exit(self,cmd):
-        quit()
-    
-
     def sys(self,command:str):
         split_cmd = command.split()
 
