@@ -15,8 +15,12 @@ class main:
         if not "http" in link:
             link = "http://"+link
 
-        response = get(link)
-
+        try:
+            response = get(link)
+        except:
+            print("Err: Website not responding")
+            return
+        
         with open(file,"wb") as f:
             f.write(response.content)
             f.close()

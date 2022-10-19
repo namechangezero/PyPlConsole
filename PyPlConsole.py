@@ -4,17 +4,25 @@ import sys
 
 sys.path.insert(0, '')
 
-plugin_folder_path = f"{path.expanduser('~')}/PyPlConsole_data/" # /plugins but one dir higher to load plugins
+plugin_folder_path = f"{path.expanduser('~')}/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
 startDir = getcwd()
 pluginsFunctions = {}
 
 def load_plugins():
     dir_before_reload = getcwd()
     chdir(plugin_folder_path)
+
+    with open("disable_plugins.txt") as disable_plugins_conf:
+        disabled_plugins = disable_plugins_conf.read().splitlines() # list with disabled plugins specified by the user in disabled_plugins.txt
+
+
     plugins_folder = getcwd()
     pluginsInFolder = listdir("plugins")
     # go through all folders in plugin folder
     for plugin in pluginsInFolder:
+        if plugin in disabled_plugins:
+            continue
+
         pl = importlib.import_module("plugins."+plugin)
         importlib.reload(pl)
         moduleDir = f"{plugins_folder}/plugins/{plugin}"
@@ -51,13 +59,9 @@ while True:
 
     cmd_no_args = cmd.split()[0]
 
-    if cmd_no_args == "rl":
-        dir_before_reload = getcwd()
-        chdir(plugin_folder_path)
+    if cmd_no_args in set({"rl","reload"}):
         pluginsFunctions = {}
-        pluginsInFolder = listdir(plugin_folder_path)
         load_plugins()
-        chdir(dir_before_reload)
 
     # runnning the oncmd functions of the plugins
     if "oncmd" in pluginsFunctions:
@@ -69,6 +73,7 @@ while True:
         for func in pluginsFunctions[cmd_no_args]:
             getattr(func, cmd_no_args)(cmd)
     else:
+        if not cmd_no_args in set({"rl","reload"}):
             print("x Command not found! x")
 
     
