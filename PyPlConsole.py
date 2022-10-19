@@ -14,7 +14,7 @@ def load_plugins():
 
     with open("disable_plugins.txt") as disable_plugins_conf:
         disabled_plugins = disable_plugins_conf.read().splitlines() # list with disabled plugins specified by the user in disabled_plugins.txt
-
+        # slash (/) can be used as comment in disable_plugins.txt because file names can't start with a slash
 
     plugins_folder = getcwd()
     pluginsInFolder = listdir("plugins")
