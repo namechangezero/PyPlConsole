@@ -105,7 +105,7 @@ class main:
 
     rename = mv
 
-    def sys(self,command:str):
+    def s(self,command:str):
         split_cmd = command.split()
 
         if len(split_cmd)<2:
