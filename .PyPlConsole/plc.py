@@ -4,7 +4,7 @@ import sys
 
 sys.path.insert(0, '')
 
-plugin_folder_path = f"{path.expanduser('~')}/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
+plugin_folder_path = f"{path.expanduser('~')}/.PyPlConsole/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
 startDir = getcwd()
 pluginsFunctions = {}
 
