@@ -4,13 +4,17 @@ import sys
 
 sys.path.insert(0, '')
 
-plugin_folder_path = f"{path.expanduser('~')}/.PyPlConsole/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
+DEV = False
+data_folder = f"{path.expanduser('~')}/.PyPlConsole/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
+if DEV:
+    data_folder = ".PyPlConsole/.PyPlConsole_data/"
+
 startDir = getcwd()
 pluginsFunctions = {}
 
 def load_plugins():
     dir_before_reload = getcwd()
-    chdir(plugin_folder_path)
+    chdir(data_folder)
 
     with open("disable_plugins.txt") as disable_plugins_conf:
         disabled_plugins = set(disable_plugins_conf.read().splitlines()) # list with disabled plugins specified by the user in disabled_plugins.txt
