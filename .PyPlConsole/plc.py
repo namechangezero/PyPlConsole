@@ -54,7 +54,10 @@ while True:
         cmd = input("$> ")
     except KeyboardInterrupt:
         print("Good Bye! - PyPlConsole")
-        break
+        if "_bye" in pluginsFunctions:
+            for bye in pluginsFunctions["_bye"]:
+                bye._bye()
+        exit()
 
     if "onenter" in pluginsFunctions:
             for onEnter in pluginsFunctions["onenter"]:
