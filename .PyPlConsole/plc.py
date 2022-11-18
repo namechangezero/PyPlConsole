@@ -49,14 +49,16 @@ def load_plugins():
 
 load_plugins()
 
+def stop_plugins():
+    if "_bye" in pluginsFunctions:
+        for bye in pluginsFunctions["_bye"]:
+            bye._bye()
+
 while True:
     try:
         cmd = input("$> ")
     except KeyboardInterrupt:
-        print("Good Bye! - PyPlConsole")
-        if "_bye" in pluginsFunctions:
-            for bye in pluginsFunctions["_bye"]:
-                bye._bye()
+        stop_plugins()
         exit()
 
     if "onenter" in pluginsFunctions:
@@ -71,9 +73,7 @@ while True:
     cmd_no_args = cmd.split()[0]
 
     if cmd_no_args in set({"rl","reload"}):
-        if "_bye" in pluginsFunctions:
-            for bye in pluginsFunctions["_bye"]:
-                bye._bye()
+        stop_plugins()
         pluginsFunctions = {}
         load_plugins()
 
@@ -83,9 +83,7 @@ while True:
             onCmd.oncmd(cmd)
 
     if cmd_no_args == "exit":
-        if "_bye" in pluginsFunctions:
-            for bye in pluginsFunctions["_bye"]:
-                bye._bye()
+        stop_plugins()
         exit()
 
     # running the command of the input from the plugins
