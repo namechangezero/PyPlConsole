@@ -115,3 +115,5 @@ class main:
         commands = " ".join(split_cmd[1:])
         system(command=commands)
 
+    def _bye(self):
+        print("Bye! - PyPlConsole default tools")
