@@ -50,7 +50,11 @@ def load_plugins():
 load_plugins()
 
 while True:
-    cmd = input("$> ")
+    try:
+        cmd = input("$> ")
+    except KeyboardInterrupt:
+        print("Good Bye! - PyPlConsole")
+        break
 
     if "onenter" in pluginsFunctions:
             for onEnter in pluginsFunctions["onenter"]:

@@ -1,6 +1,6 @@
 / Add plugins that should not be loaded here:
 / for example:
 / plugin_name (without slash/ at the begining)
-/ slashes(/) at the begining like here can be used for comments (wont affect anything)
+/ slashes(/) at the begining like here can be used for comments (won't affect anything)
 
 activity_log
