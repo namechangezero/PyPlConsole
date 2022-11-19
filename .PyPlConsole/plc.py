@@ -4,7 +4,7 @@ import sys
 
 sys.path.insert(0, '')
 
-DEV = True
+DEV = False
 data_folder = f"{path.expanduser('~')}/.PyPlConsole/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
 if DEV:
     data_folder = ".PyPlConsole/.PyPlConsole_data/"
