@@ -1,6 +1,6 @@
 from requests import get
 class main:
-    def __init__(self, moduleDir, startDir) -> None:
+    def __init__(self, moduleDir, startDir,*a) -> None:
         pass
     
     def catch(self, cmd:str):

@@ -7,7 +7,7 @@ import importlib.util
 import sys
 
 class main:
-    def __init__(self, moduleDir, startDir) -> None:
+    def __init__(self, moduleDir, startDir,*a) -> None:
         self.os = operating_system()
         init()
 
@@ -46,7 +46,7 @@ class main:
         if len(dir)<2:
             print("You need to give a filename as argument!")
             return
-        dir = dir[-1]
+        dir = " ".join(dir[1:])
         if not path.exists(dir):
             print("Path doesn't exist!")
             return
@@ -59,7 +59,7 @@ class main:
         if len(filename)<2:
             print("You need to give a filename as argument!")
             return
-        filename = filename[-1]
+        filename = " ".join(filename[1:])
         open(filename,"a").close()
 
     def read(self, cmd:str):
@@ -67,7 +67,7 @@ class main:
         if len(filename)<2:
             print("You need to give a filename as argument!")
             return
-        filename = filename[-1]
+        filename = " ".join(filename[1:])
         if not path.exists(filename):
             print("File doesn't exist!")
             return
@@ -83,7 +83,7 @@ class main:
         if len(filename)<2:
             print("You need to give a filename as argument!")
             return
-        filename=filename[-1]
+        filename=" ".join(filename[1:])
         if path.exists(filename):
             removeFile(filename)
         else:

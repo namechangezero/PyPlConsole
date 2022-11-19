@@ -4,7 +4,7 @@ import sys
 
 sys.path.insert(0, '')
 
-DEV = False
+DEV = True
 data_folder = f"{path.expanduser('~')}/.PyPlConsole/.PyPlConsole_data/" # /plugins but one dir higher to load plugins
 if DEV:
     data_folder = ".PyPlConsole/.PyPlConsole_data/"
@@ -30,7 +30,7 @@ def load_plugins():
         pl = importlib.import_module("plugins."+plugin)
         importlib.reload(pl)
         moduleDir = f"{plugins_folder}/plugins/{plugin}"
-        pl = pl.main(moduleDir, startDir)
+        pl = pl.main(moduleDir, startDir, plugins_folder+"\\plugins")
 
         # put all funcs of plugin in a list and append it to the dict of the plugin (pluginsFunctions)
         plFunctions = []

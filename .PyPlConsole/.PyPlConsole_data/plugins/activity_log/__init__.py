@@ -1,7 +1,7 @@
 import sqlite3
 from time import strftime
 class main:
-    def __init__(self, pluginDir, startDir) -> None:
+    def __init__(self, pluginDir, startDir,*a) -> None:
         self.db = sqlite3.connect(pluginDir+"/logging.sqlite")
         self.cursor = self.db.cursor()
 

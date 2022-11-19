@@ -1,6 +1,6 @@
 from os import path, system
 class main:
-    def __init__(self, pluginDir,startDir):
+    def __init__(self, pluginDir,startDir,*a):
         self.startDir = startDir
         self.pluginDir = pluginDir
     def install_depend(self,cmd:str):
