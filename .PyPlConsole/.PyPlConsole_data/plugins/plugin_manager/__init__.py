@@ -2,7 +2,7 @@ from requests import get
 from json import loads
 from io import BytesIO
 from zipfile import ZipFile
-from os import getcwd, chdir
+from os import getcwd, chdir, system, path
 class main:
     def __init__(self, moduleDir:str, startDir,pluginsDir) -> None:
         self.pluginsDir = pluginsDir
@@ -23,9 +23,16 @@ class main:
             plugin_zipfile_link = archive[cmd_split[2]]
             r = get(plugin_zipfile_link, stream=True)
             z = ZipFile(BytesIO(r.content))
+            extraced_dir_name = z.namelist()[0]
             dir_before_chdir = getcwd()
             chdir(self.pluginsDir)
             z.extractall()
+
+            if path.exists(extraced_dir_name+"\\dependencies.txt"):
+                print("installing requirements for "+extraced_dir_name)
+                chdir(extraced_dir_name)
+                system("pip3 install -r dependencies.txt")
+
             chdir(dir_before_chdir)
             print("successfully installed plugin")
         elif cmd_split[1] == "help":

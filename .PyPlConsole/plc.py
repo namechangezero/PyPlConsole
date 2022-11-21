@@ -27,10 +27,14 @@ def load_plugins():
         if plugin in disabled_plugins:
             continue
 
-        pl = importlib.import_module("plugins."+plugin)
-        importlib.reload(pl)
-        moduleDir = f"{plugins_folder}/plugins/{plugin}"
-        pl = pl.main(moduleDir, startDir, plugins_folder+"\\plugins")
+        try:
+            pl = importlib.import_module("plugins."+plugin)
+            importlib.reload(pl)
+            moduleDir = f"{plugins_folder}/plugins/{plugin}"
+            pl = pl.main(moduleDir, startDir, plugins_folder+"\\plugins")
+        except Exception as e:
+            print("Couldn't load "+plugin)
+            print(e)
 
         # put all funcs of plugin in a list and append it to the dict of the plugin (pluginsFunctions)
         plFunctions = []
