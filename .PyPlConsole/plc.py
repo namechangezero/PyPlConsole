@@ -33,7 +33,7 @@ def load_plugins():
             moduleDir = f"{plugins_folder}/plugins/{plugin}"
             pl = pl.main(moduleDir, startDir, plugins_folder+"\\plugins")
         except Exception as e:
-            print("Couldn't load "+plugin)
+            print("Couldn't load "+ plugin)
             print(e)
 
         # put all funcs of plugin in a list and append it to the dict of the plugin (pluginsFunctions)
@@ -56,7 +56,10 @@ load_plugins()
 def stop_plugins():
     if "_bye" in pluginsFunctions:
         for bye in pluginsFunctions["_bye"]:
-            bye._bye()
+            try:
+                bye._bye()
+            except Exception as e:
+                print(e)
 
 while True:
     try:
@@ -67,7 +70,10 @@ while True:
 
     if "onenter" in pluginsFunctions:
             for onEnter in pluginsFunctions["onenter"]:
-                onEnter.onenter(cmd)
+                try:
+                    onEnter.onenter(cmd)
+                except Exception as e:
+                    print(e)
 
     # if no command was given, dont do following stuff, because onenter was run already and theres no command to run oncmd
     if cmd == "":
@@ -84,16 +90,22 @@ while True:
     # runnning the oncmd functions of the plugins
     if "oncmd" in pluginsFunctions:
         for onCmd in pluginsFunctions["oncmd"]:
-            onCmd.oncmd(cmd)
+            try:
+                onCmd.oncmd(cmd)
+            except Exception as e:
+                print(e)
 
     if cmd_no_args == "exit":
         stop_plugins()
         exit()
 
-    # running the command of the input from the plugins
+    # running the command inside the plugins functions (if the command is in the pluginsFunctions dict)
     if cmd_no_args in pluginsFunctions:
         for func in pluginsFunctions[cmd_no_args]:
-            getattr(func, cmd_no_args)(cmd)
+            try:
+                getattr(func, cmd_no_args)(cmd)
+            except Exception as e:
+                print(e)
     else:
         if not cmd_no_args in set({"rl","reload"}):
             print("x Command not found! x")
