@@ -62,6 +62,8 @@ def stop_plugins():
                 print(e)
 
 while True:
+    oncmd_ran = set({})
+
     try:
         cmd = input("$> ")
     except KeyboardInterrupt:
@@ -91,7 +93,7 @@ while True:
     if "oncmd" in pluginsFunctions:
         for onCmd in pluginsFunctions["oncmd"]:
             try:
-                onCmd.oncmd(cmd)
+                oncmd_ran.add( onCmd.oncmd(cmd) )
             except Exception as e:
                 print(e)
 
@@ -108,6 +110,7 @@ while True:
                 print(e)
     else:
         if not cmd_no_args in set({"rl","reload"}):
-            print("x Command not found! x")
+            if True not in oncmd_ran:
+                print("x Command not found! x")
 
     
